@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FirebaseTestApp</string>
+
+    <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+
+    <string name="version">Version 0.1</string>
+
+    <string name="logout">Logout</string>
+    <string name="login">Login</string>
+    <string name="profile">Profile</string>
+    <string name="posts">Posts</string>
+    <string name="about">About</string>
+
+    <string-array name="drawer">
+        <item>@string/profile</item>
+        <item>@string/posts</item>
+        <item>@string/about</item>
+    </string-array>
+
+</resources>
