@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 public class QuoteViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView author;
-    public TextView book;
-    public TextView quote_text;
+    private TextView author;
+    private TextView book;
+    private TextView quote_text;
 
     public QuoteViewHolder(View itemView) {
         super(itemView);

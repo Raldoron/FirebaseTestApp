@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private int currentFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,26 +40,30 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content, QuotesListFragment.getInstance());
         transaction.commitAllowingStateLoss();
+        currentFragment = 2;
 
         adapter = new NavigationAdapter(getResources().getStringArray(R.array.drawer),
                 new NavigationOnClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 drawerLayout.closeDrawer(recyclerView);
-                if (position == 1){
+                if (position == 1 && currentFragment != 1){
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.content, ProfileFragment.getInstance());
                     transaction.commitAllowingStateLoss();
+                    currentFragment = 1;
                 }
-                else if (position == 2){
+                else if (position == 2 && currentFragment != 2){
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.content, QuotesListFragment.getInstance());
                     transaction.commitAllowingStateLoss();
+                    currentFragment = 2;
                 }
-                else if (position == 3){
+                else if (position == 3 && currentFragment != 3){
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.content, AboutFragment.getInstance());
                     transaction.commitAllowingStateLoss();
+                    currentFragment = 3;
                 }
             }
         });

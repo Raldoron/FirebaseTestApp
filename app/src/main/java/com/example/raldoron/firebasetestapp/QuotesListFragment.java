@@ -1,5 +1,6 @@
 package com.example.raldoron.firebasetestapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -76,7 +77,15 @@ public class QuotesListFragment extends Fragment {
                 databaseReference.child("quotes")
         ) {
             @Override
-            protected void populateViewHolder(QuoteViewHolder viewHolder, Quote quote, int position) {
+            protected void populateViewHolder(QuoteViewHolder viewHolder, final Quote quote, int position) {
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), QuoteActivity.class);
+                        intent.putExtra("quote", quote);
+                        startActivity(intent);
+                    }
+                });
                 viewHolder.bindToQuote(quote);
             }
         };
