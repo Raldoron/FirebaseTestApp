@@ -7,6 +7,7 @@
     android:background="@android:color/holo_orange_dark"
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:navigationIcon="?attr/homeAsUpIndicator"
     app:popupTheme="@style/Theme.AppCompat.Light"
     app:titleTextColor="@android:color/white">
 
