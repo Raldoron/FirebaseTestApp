@@ -12,10 +12,10 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Quote implements Parcelable {
 
-    public String author;
-    public String book;
-    public String text;
-    public String image;
+    private String author;
+    private String book;
+    private String text;
+    private String image;
 
     public Quote() {
     }
@@ -32,6 +32,38 @@ public class Quote implements Parcelable {
         book = in.readString();
         text = in.readString();
         image = in.readString();
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getBook() {
+        return book;
+    }
+
+    public void setBook(String book) {
+        this.book = book;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public static final Creator<Quote> CREATOR = new Creator<Quote>() {

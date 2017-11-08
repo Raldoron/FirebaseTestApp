@@ -1,8 +1,11 @@
-package com.example.raldoron.firebasetestapp;
+package com.example.raldoron.firebasetestapp.ViewHolders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.raldoron.firebasetestapp.Quote;
+import com.example.raldoron.firebasetestapp.R;
 
 /**
  * Created by Raldoron on 19.05.17.
@@ -22,8 +25,8 @@ public class QuoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindToQuote(Quote quote){
-        author.setText(quote.author);
-        book.setText(quote.book);
-        quote_text.setText(quote.text);
+        author.setText(quote.getAuthor());
+        book.setText(quote.getBook());
+        quote_text.setText(quote.getText());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.raldoron.firebasetestapp;
+package com.example.raldoron.firebasetestapp.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.raldoron.firebasetestapp.Quote;
+import com.example.raldoron.firebasetestapp.QuoteActivity;
+import com.example.raldoron.firebasetestapp.ViewHolders.QuoteViewHolder;
+import com.example.raldoron.firebasetestapp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class QuotesListFragment extends Fragment {
 
-    public static final String TAG = "QuotesList";
+    private static final String TAG = "QuotesList";
 
     private DatabaseReference databaseReference;
     private RecyclerView recyclerView;
@@ -52,7 +56,6 @@ public class QuotesListFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Quote quote = dataSnapshot.getValue(Quote.class);
-                Log.d(TAG, "Value: " + quote.text);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

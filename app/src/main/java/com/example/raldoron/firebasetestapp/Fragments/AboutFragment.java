@@ -1,4 +1,4 @@
-package com.example.raldoron.firebasetestapp;
+package com.example.raldoron.firebasetestapp.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.raldoron.firebasetestapp.R;
 
 /**
  * Created by Raldoron on 18.04.17.

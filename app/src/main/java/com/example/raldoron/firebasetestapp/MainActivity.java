@@ -8,6 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.raldoron.firebasetestapp.Fragments.AboutFragment;
+import com.example.raldoron.firebasetestapp.Fragments.ProfileFragment;
+import com.example.raldoron.firebasetestapp.Fragments.QuotesListFragment;
+
 public class MainActivity extends BaseActivity {
 
     private ActionBarDrawerToggle toggle;
@@ -39,7 +43,7 @@ public class MainActivity extends BaseActivity {
         currentFragment = 2;
 
         adapter = new NavigationAdapter(getResources().getStringArray(R.array.drawer),
-                new NavigationOnClickListener() {
+                new NavigationAdapter.NavigationOnClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 drawerLayout.closeDrawer(recyclerView);

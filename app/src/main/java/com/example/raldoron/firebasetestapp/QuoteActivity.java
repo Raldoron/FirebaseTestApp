@@ -47,18 +47,19 @@ public class QuoteActivity extends BaseActivity {
         });
 
         quote = getIntent().getParcelableExtra("quote");
-        author = (TextView) findViewById(R.id.author);
-        author.setText(quote.author);
-        book = (TextView) findViewById(R.id.book);
-        book.setText(quote.book);
-        quote_text = (TextView) findViewById(R.id.quote);
-        quote_text.setText(quote.text);
 
-        storageReference = FirebaseStorage.getInstance().getReference();
+        author = (TextView) findViewById(R.id.author);
+        book = (TextView) findViewById(R.id.book);
+        quote_text = (TextView) findViewById(R.id.quote);
         book_cover = (ImageView) findViewById(R.id.book_cover);
 
-        if (quote.image != null) {
-            storageReference.child(quote.image).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        author.setText(quote.getAuthor());
+        book.setText(quote.getBook());
+        quote_text.setText(quote.getText());
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+        if (quote.getImage() != null) {
+            storageReference.child(quote.getImage()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Picasso.with(getBaseContext())

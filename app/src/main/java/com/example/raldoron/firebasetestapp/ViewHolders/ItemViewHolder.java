@@ -1,4 +1,4 @@
-package com.example.raldoron.firebasetestapp;
+package com.example.raldoron.firebasetestapp.ViewHolders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

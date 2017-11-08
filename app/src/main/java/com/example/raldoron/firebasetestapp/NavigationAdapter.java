@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.raldoron.firebasetestapp.ViewHolders.HeaderViewHolder;
+import com.example.raldoron.firebasetestapp.ViewHolders.ItemViewHolder;
+
 /**
  * Created by Raldoron on 16.04.17.
  */
@@ -73,5 +76,9 @@ public class NavigationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         return items.length + 1;
+    }
+
+    public interface NavigationOnClickListener {
+        void onItemClick(View view, int position);
     }
 }

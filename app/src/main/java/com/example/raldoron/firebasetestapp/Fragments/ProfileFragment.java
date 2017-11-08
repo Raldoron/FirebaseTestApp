@@ -1,4 +1,4 @@
-package com.example.raldoron.firebasetestapp;
+package com.example.raldoron.firebasetestapp.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.raldoron.firebasetestapp.LoginActivity;
+import com.example.raldoron.firebasetestapp.R;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
