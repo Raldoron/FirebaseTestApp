@@ -9,11 +9,8 @@
         android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/holo_orange_dark"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        style="@style/AppToolbar"
         app:navigationIcon="?attr/homeAsUpIndicator"
-        app:popupTheme="@style/Theme.AppCompat.Light"
         app:titleTextColor="@android:color/white"
         app:layout_scrollFlags="scroll|enterAlways">
 

@@ -17,4 +17,6 @@
         <item>@string/about</item>
     </string-array>
 
+    <string name="imageContentDescription">Book illustration</string>
+
 </resources>

@@ -8,8 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- TODO add toolbar style -->
-    <style name="AppToolbar" parent="Theme.AppCompat.Light.NoActionBar">
-
+    <style name="AppToolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">@android:color/holo_orange_dark</item>
+        <item name="android:elevation">4dp</item>
     </style>
+
+    <style name="AboutStyle">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Large</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CardStyle" parent="@style/CardView">
+        <item name="android:layout_margin">5dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">5dp</item>
+    </style>
+
+
 </resources>
