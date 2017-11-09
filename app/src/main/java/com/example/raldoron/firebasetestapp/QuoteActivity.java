@@ -1,9 +1,11 @@
 package com.example.raldoron.firebasetestapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -29,8 +31,10 @@ public class QuoteActivity extends BaseActivity {
     private Quote quote;
     private TextView author;
     private TextView book;
-    private TextView quote_text;
-    private ImageView book_cover;
+    private TextView quoteText;
+    private ImageView bookCover;
+
+    private AppCompatButton shareButton;
 
     private StorageReference storageReference;
 
@@ -50,12 +54,14 @@ public class QuoteActivity extends BaseActivity {
 
         author = (TextView) findViewById(R.id.author);
         book = (TextView) findViewById(R.id.book);
-        quote_text = (TextView) findViewById(R.id.quote);
-        book_cover = (ImageView) findViewById(R.id.book_cover);
+        quoteText = (TextView) findViewById(R.id.quote);
+        bookCover = (ImageView) findViewById(R.id.book_cover);
+
+        shareButton = (AppCompatButton) findViewById(R.id.share_button);
 
         author.setText(quote.getAuthor());
         book.setText(quote.getBook());
-        quote_text.setText(quote.getText());
+        quoteText.setText(quote.getText());
 
         storageReference = FirebaseStorage.getInstance().getReference();
         if (quote.getImage() != null) {
@@ -64,7 +70,7 @@ public class QuoteActivity extends BaseActivity {
                 public void onSuccess(Uri uri) {
                     Picasso.with(getBaseContext())
                             .load(uri)
-                            .into(book_cover);
+                            .into(bookCover);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -73,6 +79,25 @@ public class QuoteActivity extends BaseActivity {
                 }
             });
         }
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        getResources().getString(
+                                R.string.share_message,
+                                quote.getText(),
+                                quote.getAuthor(),
+                                quote.getBook()
+                        )
+                );
+                intent.setType("text/plain");
+                startActivity(intent);
+            }
+        });
 
     }
 }

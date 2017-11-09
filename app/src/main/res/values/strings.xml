@@ -17,6 +17,9 @@
         <item>@string/about</item>
     </string-array>
 
-    <string name="imageContentDescription">Book illustration</string>
+    <string name="image_content_description">Book illustration</string>
+    <string name="share_button">Share</string>
+
+    <string name="share_message">\"%1$s\"\n%2$s, \"%3$s\"</string>
 
 </resources>
