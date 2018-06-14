@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.example.raldoron.firebasetestapp"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,24 +21,28 @@ android {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:design:${rootProject.ext.supportLibraryVersion}"
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
-    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibraryVersion}"
-    compile "com.google.firebase:firebase-database:${rootProject.ext.firebaseLibraryVersion}"
-    compile "com.google.firebase:firebase-auth:${rootProject.ext.firebaseLibraryVersion}"
-    compile "com.google.firebase:firebase-storage:${rootProject.ext.firebaseLibraryVersion}"
-    compile 'com.firebaseui:firebase-ui-database:1.2.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    testCompile 'junit:junit:4.12'
+    implementation "com.android.support:design:${rootProject.ext.supportLibraryVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibraryVersion}"
+    implementation "com.android.support:recyclerview-v7:${rootProject.ext.supportLibraryVersion}"
+    implementation "com.google.firebase:firebase-database:${rootProject.ext.firebaseLibraryVersion}"
+    implementation "com.google.firebase:firebase-auth:${rootProject.ext.firebaseLibraryVersion}"
+    implementation "com.google.firebase:firebase-storage:${rootProject.ext.firebaseLibraryVersion}"
+    implementation 'com.firebaseui:firebase-ui-database:1.2.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.facebook.android:facebook-android-sdk:4.33.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    testImplementation 'junit:junit:4.12'
 }
 
 
