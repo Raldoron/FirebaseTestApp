@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.raldoron.firebasetestapp.Fragments.AboutFragment;
 import com.example.raldoron.firebasetestapp.Fragments.ProfileFragment;
-import com.example.raldoron.firebasetestapp.Fragments.QuotesListFragment;
+import com.example.raldoron.firebasetestapp.Fragments.QuotesList.QuotesListFragment;
 
 
 

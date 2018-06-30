@@ -1,11 +1,12 @@
-package com.example.raldoron.firebasetestapp;
+package com.example.raldoron.firebasetestapp.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-/**
+
+/*
  * Created by Raldoron on 18.05.17.
  */
 
@@ -27,7 +28,7 @@ public class Quote implements Parcelable {
         this.image = image;
     }
 
-    protected Quote(Parcel in) {
+    private Quote(Parcel in) {
         author = in.readString();
         book = in.readString();
         text = in.readString();
