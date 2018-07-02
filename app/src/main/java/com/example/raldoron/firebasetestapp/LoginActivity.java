@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -18,6 +21,9 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /*
  * Created by Raldoron on 23.05.17.
  */
@@ -27,20 +33,26 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "FacebookLogin";
 
     private CallbackManager callbackManager;
-
     private FirebaseAuth firebaseAuth;
 
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.login_button)
+    LoginButton loginButton;
+
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        LoginButton loginButton = findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
+        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.setOnClickListener(view -> showWaitDialog());
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -50,11 +62,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
+                hideWaitDialog();
                 Log.d(TAG, "onCancel");
             }
 
             @Override
             public void onError(FacebookException error) {
+                hideWaitDialog();
                 Log.d(TAG, "onError: " + error);
             }
         });
@@ -78,9 +92,11 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(LoginActivity.this, task -> {
                     if (task.isSuccessful()) {
+                        hideWaitDialog();
                         Toast.makeText(LoginActivity.this, "Success authentication.", Toast.LENGTH_SHORT).show();
                         startMainActivity();
                     } else {
+                        hideWaitDialog();
                         Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -95,5 +111,15 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    private void showWaitDialog() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideWaitDialog() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        progressBar.setVisibility(View.GONE);
     }
 }
