@@ -5,21 +5,26 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ProgressBar;
 
 import com.example.raldoron.firebasetestapp.Fragments.AboutFragment;
 import com.example.raldoron.firebasetestapp.Fragments.ProfileFragment;
 import com.example.raldoron.firebasetestapp.Fragments.QuotesList.QuotesListFragment;
 
+import butterknife.BindView;
 
 
 public class MainActivity extends BaseActivity {
 
-    private DrawerLayout drawerLayout;
-    private RecyclerView recyclerView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.left_drawer)
+    RecyclerView navRecyclerView;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private NetworkStateReceiver networkStateReceiver;
     private IntentFilter intentFilter;
@@ -27,18 +32,23 @@ public class MainActivity extends BaseActivity {
     private int currentFragment;
 
     @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, getToolbar(), R.string.app_name, R.string.app_name);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        addDrawerListenerTo(drawerLayout);
 
-        recyclerView = findViewById(R.id.left_drawer);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        navRecyclerView.setLayoutManager(layoutManager);
 
         networkStateReceiver = new NetworkStateReceiver();
         intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -51,7 +61,7 @@ public class MainActivity extends BaseActivity {
 
         RecyclerView.Adapter adapter = new NavigationAdapter(getResources().getStringArray(R.array.drawer),
                 (view, position) -> {
-                    drawerLayout.closeDrawer(recyclerView);
+                    drawerLayout.closeDrawer(navRecyclerView);
                     if (position == 1 && currentFragment != 1) {
                         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
                         t.replace(R.id.content, ProfileFragment.getInstance());
@@ -69,7 +79,7 @@ public class MainActivity extends BaseActivity {
                         currentFragment = 3;
                     }
                 });
-        recyclerView.setAdapter(adapter);
+        navRecyclerView.setAdapter(adapter);
 
     }
 

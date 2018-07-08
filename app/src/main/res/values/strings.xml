@@ -5,6 +5,10 @@
 
     <string name="version">Version 0.1</string>
 
+
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+
     <string name="logout">Logout</string>
     <string name="login">Login</string>
     <string name="profile">Profile</string>
