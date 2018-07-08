@@ -3,10 +3,9 @@ package com.example.raldoron.firebasetestapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.raldoron.firebasetestapp.Models.Quote;
@@ -14,29 +13,46 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 /*
  * Created by Raldoron on 27.06.17.
  */
 
 public class QuoteActivity extends BaseActivity {
 
+
+    @BindView(R.id.author)
+    TextView author;
+    @BindView(R.id.book)
+    TextView book;
+    @BindView(R.id.quote)
+    TextView quoteText;
+    @BindView(R.id.book_cover)
+    ImageView bookCover;
+
     private static final String TAG = "QuoteActivity";
+
+    private Quote quote;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_quote;
+    }
+
+    @Override
+    public ProgressBar getProgressBar() {
+        return null;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quote);
-        Toolbar toolbar = getToolbar();
+
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        Quote quote = getIntent().getParcelableExtra("quote");
-
-        TextView author = findViewById(R.id.author);
-        TextView book = findViewById(R.id.book);
-        TextView quoteText = findViewById(R.id.quote);
-        ImageView bookCover = findViewById(R.id.book_cover);
-
-        AppCompatButton shareButton = findViewById(R.id.share_button);
+        quote = getIntent().getParcelableExtra("quote");
 
         author.setText(quote.getAuthor());
         book.setText(quote.getBook());
@@ -53,7 +69,11 @@ public class QuoteActivity extends BaseActivity {
                     .addOnFailureListener(e -> Log.e(TAG, "Error: " + e.toString()));
         }
 
-        shareButton.setOnClickListener(v -> {
+    }
+
+    @OnClick(R.id.share_button)
+    void onShareClick() {
+        if (quote != null) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
             intent.putExtra(
@@ -67,7 +87,7 @@ public class QuoteActivity extends BaseActivity {
             );
             intent.setType("text/plain");
             startActivity(intent);
-        });
-
+        }
     }
+
 }
